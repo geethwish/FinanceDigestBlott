@@ -1,0 +1,2 @@
+# FinanceDigestBlott
+Finance Digest App
