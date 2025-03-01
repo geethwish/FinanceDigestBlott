@@ -6,12 +6,20 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
+    "types": [
+      "nativewind/types",
+      "node",
+      "jest"
+    ]
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "types.d.ts",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "config/firebaseConfig.js",
+    "nativewind-env.d.ts"
   ]
 }

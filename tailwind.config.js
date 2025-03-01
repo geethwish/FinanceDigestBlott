@@ -1,7 +1,30 @@
 module.exports = {
-  content: ["./App.tsx", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#523AE4",
+        secondary: "#b6adf2",
+        danger: "#e74c3c",
+        textPrimary: "#171717",
+        textSecondary: "#737373",
+      },
+    },
+    fontFamily: {
+      sans: ["Roboto", "sans-serif"],
+    },
+    fontWeight: {
+      100: "100",
+      200: "200",
+      300: "300",
+      400: "400",
+      500: "500",
+      600: "600",
+      700: "700",
+      800: "800",
+      900: "900",
+    },
   },
   plugins: [],
 };
