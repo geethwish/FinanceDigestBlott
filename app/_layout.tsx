@@ -33,10 +33,10 @@ function AppContent() {
     setTimeout(async () => {
       setIsReady(true);
       await SplashScreen.hideAsync();
-    }, 2000);
+    }, 6000);
   }, []);
 
-  if (!isReady || !loaded) {
+  if (!isReady) {
     return (
       <View style={tw`flex-1 bg-black justify-center items-center`}>
         <CustomSplashScreen width={120} height={120} />
