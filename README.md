@@ -23,7 +23,20 @@ npm install -g expo-cli
    cd FinanceDigestBlott
    ```
 
-2. Install dependencies:
+2. Create a `.env` file in the root directory and add your API URL and secret:
+
+   ```sh
+   touch .env
+   ```
+
+   Add the following lines to the `.env` file:
+
+   ```env
+   EXPO_PUBLIC_API_URL=https://your-api-url.com
+   EXPO_PUBLIC_API_SECRET=your-api-secret
+   ```
+
+3. Install dependencies:
 
    ```sh
    npm install
@@ -31,7 +44,7 @@ npm install -g expo-cli
    yarn install
    ```
 
-3. Start the development server:
+4. Start the development server:
    ```sh
    npm start
    # or
