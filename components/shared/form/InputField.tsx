@@ -13,8 +13,6 @@ interface InputFieldProps {
 }
 
 const InputField: FC<InputFieldProps> = ({ onChangeText, placeholder, value, onBlur, name, error, touched }) => {
-    console.log(value);
-
     return (
         <>
             <TextInput

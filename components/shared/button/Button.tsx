@@ -12,7 +12,7 @@ interface CustomButtonProps {
 
 const Button: FC<CustomButtonProps> = ({ onPress, label, disabled = false, variant = 'default', icon }) => {
     return (
-        <TouchableOpacity className={`${variant === 'icon' ? 'h-[56px] w-[56px]' : ''} bg-primary p-4 rounded-full flex items-center ${disabled ? 'bg-secondary' : ''}`} onPress={onPress} disabled={disabled}>
+        <TouchableOpacity className={`${variant === 'icon' ? 'h-[56px] w-[56px]' : 'w-full'} bg-primary p-4 rounded-full flex items-center ${disabled ? 'bg-secondary' : ''}`} onPress={onPress} disabled={disabled}>
             {
                 variant === 'icon' && (
                     <View className='h-full w-full flex items-center justify-center'>

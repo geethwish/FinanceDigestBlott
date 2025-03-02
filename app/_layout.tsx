@@ -64,6 +64,7 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="index" redirect />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
 

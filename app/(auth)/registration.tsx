@@ -11,8 +11,9 @@ import Button from "@/components/shared/button/Button";
 import ChevronRight from "@/components/shared/svgIcons/ChevronRight";
 import InputField from "@/components/shared/form/InputField";
 import { registerUser } from "../../store/slices/UserSlice";
+import { router } from 'expo-router'
 
-export default function RegisterScreen({ navigation }: { navigation: NavigationProp<any> }) {
+export default function RegisterScreen() {
     const dispatch = useDispatch();
 
     const signupValidationSchema = Yup.object().shape({
@@ -23,7 +24,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
     const handleRegister = async (values: any) => {
         // save submitted values to redux store
         dispatch(registerUser(values));
-        // navigation.navigate("Home");
+        router.push('/notification')
     };
 
     return (
