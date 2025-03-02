@@ -3,15 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
-    "types": [
-      "nativewind/types",
-      "node",
-      "jest"
-    ]
+    "types": ["nativewind/types", "node", "jest"]
   },
   "include": [
     "**/*.ts",

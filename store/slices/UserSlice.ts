@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface UserState {
+export interface UserState {
   firstName: string | null;
   lastName: string | null;
   loading: boolean;
@@ -11,6 +11,13 @@ const initialState: UserState = {
   firstName: null,
   lastName: null,
   loading: false,
+};
+
+const fetchUserDetails = async () => {
+  // Saved User details form db
+  const firstName = await AsyncStorage.getItem("firstName");
+  const lastName = await AsyncStorage.getItem("lastName");
+  return { firstName, lastName };
 };
 
 const userSlice = createSlice({
@@ -27,8 +34,16 @@ const userSlice = createSlice({
       AsyncStorage.setItem("lastName", payload.lastName);
     },
     fetchUser: (state, action: PayloadAction<string>) => {
-      state.firstName = action.payload;
-      state.lastName = action.payload;
+      // Fetch user details from db
+      fetchUserDetails()
+        .then((userDetails) => {
+          state.firstName = userDetails.firstName;
+          state.lastName = userDetails.lastName;
+        })
+        .catch((error) => {
+          state.firstName = "";
+          state.lastName = "";
+        });
     },
   },
 });

@@ -27,7 +27,12 @@ const NewsCard: FC<NewsCardProps> = (item) => {
     return (
         <TouchableOpacity onPress={handlePress}>
             <View className={`flex-row p-4`}>
-                <Image source={{ uri: item.image }} className={`w-[100px] h-[100px]`} />
+                <Image
+                    source={{ uri: item.image }}
+                    className={`w-[100px] h-[100px]`}
+                    resizeMode="cover"
+                    loadingIndicatorSource={require('./../../../assets/images/imagePlaceholder.png')}
+                />
                 <View className={`flex-1 ml-4`}>
                     <View className='flex-row justify-between mb-2'>
                         <Text className={`text-[#FFFFFFB2] text-[12px] font-robotoSans font-400`}>{item.source}</Text>

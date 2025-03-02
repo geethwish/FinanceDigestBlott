@@ -21,6 +21,7 @@ const InputField: FC<InputFieldProps> = ({ onChangeText, placeholder, value, onB
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 onBlur={(e) => onBlur}
+                placeholderTextColor={'#A3A3A3'}
             />
             {touched && error && <Text className='text-danger mb-3 font-robotoSans'>{error}</Text>}
         </>

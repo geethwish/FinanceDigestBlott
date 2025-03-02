@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { Alert } from "react-native";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import Button from "../shared/button/Button";
@@ -17,6 +17,7 @@ const RequestNotificationPermission = () => {
         setPermissionStatus(status);
     };
 
+    // Show custom alert to ask for permission
     const showCustomAlert = () => {
         Alert.alert(
             `"Blott" Would Like to Send You Notifications`,
@@ -45,6 +46,7 @@ const RequestNotificationPermission = () => {
 
         setPermissionStatus(status);
 
+        // Redirect to dashboard after permission is granted
         router.push('/dashboard')
     };
 

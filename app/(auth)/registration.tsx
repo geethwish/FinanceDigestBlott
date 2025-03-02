@@ -1,7 +1,6 @@
 
 import { View, Text, KeyboardAvoidingView } from "react-native";
 import { useDispatch } from "react-redux";
-import { NavigationProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import tw from "twrnc";
 import { Formik } from 'formik';
@@ -64,12 +63,17 @@ export default function RegisterScreen() {
 
 
                             </View><View style={tw`p-6`} className="flex justify-end w-full items-end mt-[110px]">
-                                <Button label="Register" icon={<ChevronRight width={12} height={20} />} onPress={() => handleSubmit()} variant="icon" disabled={values.firstName === '' || values.lastName === ''} />
+                                <Button
+                                    label="Register"
+                                    icon={<ChevronRight width={12} height={20} />}
+                                    onPress={() => handleSubmit()}
+                                    variant="icon"
+                                    disabled={values.firstName === '' || values.lastName === ''}
+                                />
                             </View></>
 
                     )}
                 </Formik>
-
             </KeyboardAvoidingView>
         </SafeAreaView>
 
