@@ -22,7 +22,7 @@ const Button: FC<CustomButtonProps> = ({ onPress, label, disabled = false, varia
             }
             {
                 variant === 'default' && (
-                    <Text className='text-white text-lg font-500'>{label}</Text>
+                    <Text className='text-white text-lg font-500 font-robotoSans'>{label}</Text>
                 )
             }
 

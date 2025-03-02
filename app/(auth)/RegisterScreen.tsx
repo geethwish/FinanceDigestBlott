@@ -1,47 +1,76 @@
-import { useState } from "react";
-import { View, TextInput, Text } from "react-native";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../store/slices/UserSlice";
-import tw from "twrnc";
 
+import { View, Text, KeyboardAvoidingView } from "react-native";
+import { useDispatch } from "react-redux";
 import { NavigationProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import tw from "twrnc";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
 import Button from "@/components/shared/button/Button";
 import ChevronRight from "@/components/shared/svgIcons/ChevronRight";
+import InputField from "@/components/shared/form/InputField";
+import { registerUser } from "../../store/slices/UserSlice";
 
 export default function RegisterScreen({ navigation }: { navigation: NavigationProp<any> }) {
-    const [name, setName] = useState("");
     const dispatch = useDispatch();
 
-    const handleRegister = () => {
-        dispatch(registerUser(name));
-        navigation.navigate("Home");
+    const signupValidationSchema = Yup.object().shape({
+        firstName: Yup.string().required('First name is required'),
+        lastName: Yup.string().required('Last name is required'),
+    });
+
+    const handleRegister = async (values: any) => {
+        // save submitted values to redux store
+        dispatch(registerUser(values));
+        // navigation.navigate("Home");
     };
 
     return (
-        <SafeAreaView className="bg-light h-full" >
-            <View style={tw`p-6`}>
-                <Text style={tw`text-[30px] mb-[36px] font-bold`} className="text-textPrimary">Your legal name</Text>
-                <Text className="text-lg text-textSecondary">We need to know a bit about you so that we can create your account.</Text>
-                <View className="mt-[36px]">
-                    <TextInput
-                        style={tw`border p-2 mb-4`}
-                        placeholder="First name"
-                        onChangeText={setName}
-                    />
-                    <TextInput
-                        style={tw`border p-2 mb-4`}
-                        placeholder="Last name"
-                        onChangeText={setName}
-                    />
-                </View>
+        <SafeAreaView className="bg-light h-full">
+            <KeyboardAvoidingView className="flex" >
+                <Formik
+                    initialValues={{ firstName: '', lastName: '', }}
+                    validationSchema={signupValidationSchema}
+                    onSubmit={handleRegister}
+                >
+                    {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                        <>
+                            <View style={tw`p-6`}>
+                                <Text style={tw`text-[30px] mb-[36px] font-bold`} className="text-textPrimary font-robotoSans">Your legal name</Text>
+                                <Text className="text-lg text-textSecondary font-robotoSans">We need to know a bit about you so that we can create your account.</Text>
 
-            </View>
+                                <View className="mt-[36px]">
+                                    <InputField
+                                        value={values.firstName}
+                                        onChangeText={handleChange('firstName')}
+                                        placeholder="First name"
+                                        name="firstName"
+                                        onBlur={handleBlur('firstName')}
+                                        error={errors.firstName}
+                                        touched={touched.firstName}
+                                    />
+                                    <InputField
+                                        value={values.lastName}
+                                        onChangeText={handleChange('lastName')}
+                                        placeholder="Last name"
+                                        name="lastName"
+                                        onBlur={handleBlur('lastName')}
+                                        error={errors.lastName}
+                                        touched={touched.lastName}
+                                    />
+                                </View>
 
-            <View style={tw`p-6`} className="flex justify-end w-full items-end">
-                <Button label="Register" icon={<ChevronRight width={12} height={20} />} onPress={handleRegister} variant="icon" />
-            </View>
 
+                            </View><View style={tw`p-6`} className="flex justify-end w-full items-end mt-[110px]">
+                                <Button label="Register" icon={<ChevronRight width={12} height={20} />} onPress={() => handleSubmit()} variant="icon" disabled={values.firstName === '' || values.lastName === ''} />
+                            </View></>
+
+                    )}
+                </Formik>
+
+            </KeyboardAvoidingView>
         </SafeAreaView>
+
     );
 }
