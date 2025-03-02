@@ -6,10 +6,13 @@ import { StatusBar } from 'expo-status-bar'
 const DashboardLayout = () => {
     return (
         <>
+
             <Stack>
-                <Stack.Screen name="dashboard" options={{ headerShown: false }} />
+                <Stack.Screen name="dashboard" options={{
+                    headerShown: false,
+                }} />
             </Stack>
-            <StatusBar backgroundColor="#16162" style="dark" />
+            <StatusBar backgroundColor="#16162" style="light" />
         </>
 
     )

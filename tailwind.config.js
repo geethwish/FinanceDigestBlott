@@ -13,6 +13,8 @@ module.exports = {
     },
     fontFamily: {
       robotoSans: ["Roboto", "sans-serif"],
+      RalewaySans: ["Raleway", "sans-serif"],
+      RubikSans: ["Rubik", "sans-serif"],
     },
     fontWeight: {
       100: "100",

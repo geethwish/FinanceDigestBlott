@@ -3,35 +3,28 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
+import Toast from 'react-native-toast-message';
 
-import { useColorScheme } from '@/components/useColorScheme';
-import { store } from '@/store/store';
+import { RootState, store } from '@/store/store';
 import { View } from '@/components/Themed';
 import tw from "twrnc";
 import './../global.css'
 import CustomSplashScreen from '@/components/splashScreen/CustomSplashScreen';
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 
-export default function RootLayout() {
+function AppContent() {
+  const user = useSelector((state: RootState) => state.user);
   const [loaded, error] = useFonts({
-    roboto: require('../assets/fonts/Roboto-VariableFont_wdth,wght.ttf'),
+    robotoSans: require('../assets/fonts/Roboto-VariableFont_wdth,wght.ttf'),
+    RalewaySans: require('../assets/fonts/Raleway-VariableFont_wght.ttf'),
+    RubikSans: require('../assets/fonts/Rubik-VariableFont_wght.ttf'),
     ...FontAwesome.font,
   });
   const [isReady, setIsReady] = useState(false);
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -43,7 +36,7 @@ export default function RootLayout() {
     }, 2000);
   }, []);
 
-  if (!isReady && !loaded) {
+  if (!isReady || !loaded) {
     return (
       <View style={tw`flex-1 bg-black justify-center items-center`}>
         <CustomSplashScreen width={120} height={120} />
@@ -51,25 +44,26 @@ export default function RootLayout() {
     );
   }
 
-  return <RootLayoutNav />;
+  return <Provider store={store}>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" redirect options={{ headerShown: false }} />
+      {
+        user?.firstName !== undefined && user?.firstName !== null && user?.firstName !== '' ?
+          <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+          : <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      }
+    </Stack>
+    <Toast />
+  </Provider>
 }
 
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
 
-
+export default function RootLayout() {
   return (
     <Provider store={store}>
-
-      <Stack>
-        <Stack.Screen name="index" redirect />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-
+      <AppContent />
     </Provider>
-
   );
 }
+
 
