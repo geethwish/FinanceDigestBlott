@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Text } from "react-native";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/slices/UserSlice";
 import tw from "twrnc";
 
 import { NavigationProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Button from "@/components/shared/button/Button";
+import ChevronRight from "@/components/shared/svgIcons/ChevronRight";
 
 export default function RegisterScreen({ navigation }: { navigation: NavigationProp<any> }) {
     const [name, setName] = useState("");
@@ -36,8 +38,8 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
 
             </View>
 
-            <View style={tw`p-6`}>
-                <Button title="Register" onPress={handleRegister} />
+            <View style={tw`p-6`} className="flex justify-end w-full items-end">
+                <Button label="Register" icon={<ChevronRight width={12} height={20} />} onPress={handleRegister} variant="icon" />
             </View>
 
         </SafeAreaView>
